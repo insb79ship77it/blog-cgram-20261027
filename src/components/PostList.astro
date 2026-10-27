@@ -37,13 +37,7 @@ const { posts } = Astro.props;
                 <a href={url}>{post.data.title}</a>
               </h2>
               <p class="post-desc">{post.data.description}</p>
-              {post.data.tags.length > 0 && (
-                <ul class="tags">
-                  {post.data.tags.map((tag) => (
-                    <li>#{tag}</li>
-                  ))}
-                </ul>
-              )}
+              <TagList tags={post.data.tags} />
             </div>
           </li>
         );
