@@ -1,0 +1,20 @@
+---
+import { categorySlug, categoryTone, formatDate } from '../utils/posts';
+
+interface Props {
+  category: string;
+  date: Date;
+}
+
+const { category, date } = Astro.props;
+---
+
+<div class="meta">
+  <a
+    class={`category tone-${categoryTone(category)}`}
+    href={`/category/${categorySlug(category)}/`}
+  >
+    {category}
+  </a>
+  <time datetime={date.toISOString()}>{formatDate(date)}</time>
+</div>

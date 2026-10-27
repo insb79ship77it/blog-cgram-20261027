@@ -1,0 +1,51 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostMeta from '../../components/PostMeta.astro';
+import { getSortedPosts } from '../../utils/posts';
+import { getThumbnail } from '../../utils/thumbnail';
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const thumbnail = getThumbnail(post);
+const ogImage = thumbnail.startsWith('http') ? thumbnail : undefined;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={ogImage}
+  current={post.data.category}
+>
+  <article class="article">
+    <header class="article-head">
+      <PostMeta category={post.data.category} date={post.data.pubDate} />
+      <h1>{post.data.title}</h1>
+      <p class="lead">{post.data.description}</p>
+      {
+        post.data.tags.length > 0 && (
+          <ul class="tags">
+            {post.data.tags.map((tag) => (
+              <li>#{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <p class="back"><a href="/">전체 글 목록으로 돌아가기</a></p>
+  </article>
+</BaseLayout>
