@@ -10,7 +10,7 @@
   --life: #9a5b13;
   --news: #2554c7;
   --etc: #5b6b70;
-  --serif: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+  --serif: var(--sans);
   --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
     'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   color-scheme: light dark;
