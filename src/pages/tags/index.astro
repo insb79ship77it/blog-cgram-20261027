@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getTags, tagUrl } from '../../utils/posts';
+
+const tags = await getTags();
+---
+
+<BaseLayout
+  title="태그"
+  description="블로그 글에 붙은 태그를 한곳에 모았습니다."
+  current="태그"
+>
+  <section class="masthead compact">
+    <h1>태그</h1>
+    <p>태그 {tags.length}개</p>
+  </section>
+
+  {
+    tags.length ? (
+      <ul class="tag-list tag-cloud">
+        {tags.map((tag) => (
+          <li>
+            <a class="tag" href={tagUrl(tag.name)}>
+              #{tag.name}
+              <span class="tag-count">{tag.posts.length}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty">아직 등록된 태그가 없습니다.</p>
+    )
+  }
+</BaseLayout>
