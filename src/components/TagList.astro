@@ -1,0 +1,23 @@
+---
+import { tagUrl } from '../utils/posts';
+
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+{
+  tags.length > 0 && (
+    <ul class="tag-list">
+      {tags.map((tag) => (
+        <li>
+          <a class="tag" href={tagUrl(tag)}>
+            #{tag}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
