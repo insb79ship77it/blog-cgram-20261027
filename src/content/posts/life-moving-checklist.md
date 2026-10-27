@@ -2,6 +2,7 @@
 title: "이사 2주 전부터 챙기는 체크리스트"
 description: "이사 날짜가 정해졌을 때 놓치기 쉬운 주소 변경, 공과금, 업체 확인 항목을 시간 순으로 정리했습니다."
 category: "생활 정보"
+pubDate: 2026-10-21
 image: "/images/life-moving.svg"
 tags: ["이사", "체크리스트", "주거"]
 ---
