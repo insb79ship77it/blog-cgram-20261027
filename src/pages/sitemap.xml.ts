@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   const urls: { loc: string; lastmod?: string }[] = [
     { loc: abs('/'), lastmod: day(posts[0]?.data.pubDate) },
-    ...['/about/', '/contact/', '/privacy/'].map((path) => ({ loc: abs(path) })),
+    ...['/about/', '/contact/', '/privacy/', '/tags/'].map((path) => ({ loc: abs(path) })),
     ...categories.map((name) => ({
       loc: abs(`/category/${categorySlug(name)}/`),
     })),
