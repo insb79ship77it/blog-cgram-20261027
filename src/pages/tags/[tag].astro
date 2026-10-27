@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getTags } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const tags = await getTags();
+  return tags.map((tag) => ({
+    params: { tag: tag.slug },
+    props: { name: tag.name, posts: tag.posts },
+  }));
+}
+
+const { name, posts } = Astro.props;
+---
+
+<BaseLayout
+  title={`#${name} 태그 글`}
+  description={`${name} 태그가 붙은 글을 모아 봅니다.`}
+  current="태그"
+>
+  <section class="masthead compact">
+    <h1>#{name}</h1>
+    <p>글 {posts.length}편 · <a href="/tags/">전체 태그 보기</a></p>
+  </section>
+
+  <PostList posts={posts} />
+</BaseLayout>
