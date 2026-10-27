@@ -2,7 +2,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export type Post = CollectionEntry<'posts'>;
 
-export const SITE_NAME = '정보꾸러미 인사이트';
+export const SITE_NAME = 'C-gram';
 export const SITE_DESCRIPTION =
   '건강, 생활 정보, 뉴스를 한눈에 이해하기 쉽게 정리하는 정보 블로그입니다.';
 
