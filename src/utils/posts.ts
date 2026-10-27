@@ -40,3 +40,39 @@ export const getSortedPosts = async (): Promise<Post[]> => {
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
 };
+
+export const tagSlug = (tag: string): string =>
+  tag
+    .trim()
+    .toLowerCase()
+    .replace(/[\/?#%\\]/g, '')
+    .replace(/\s+/g, '-');
+
+export const tagUrl = (tag: string): string => `/tags/${tagSlug(tag)}/`;
+
+export interface TagInfo {
+  name: string;
+  slug: string;
+  posts: Post[];
+}
+
+// 모든 글의 태그를 모아 글 수가 많은 순으로 정렬
+export const getTags = async (): Promise<TagInfo[]> => {
+  const posts = await getSortedPosts();
+  const map = new Map<string, TagInfo>();
+
+  for (const post of posts) {
+    for (const tag of post.data.tags) {
+      const slug = tagSlug(tag);
+      if (!slug) continue;
+      const info = map.get(slug) ?? { name: tag.trim(), slug, posts: [] };
+      if (!info.posts.includes(post)) info.posts.push(post);
+      map.set(slug, info);
+    }
+  }
+
+  return [...map.values()].sort(
+    (a, b) =>
+      b.posts.length - a.posts.length || a.name.localeCompare(b.name, 'ko'),
+  );
+};
