@@ -8,6 +8,8 @@ export const SITE_DESCRIPTION =
 
 export type Tone = 'health' | 'life' | 'news' | 'etc';
 
+export const CONTACT_EMAIL = 'your-email@example.com';
+
 export const CATEGORIES: { name: string; slug: string; tone: Tone }[] = [
   { name: '건강', slug: 'health', tone: 'health' },
   { name: '생활 정보', slug: 'life', tone: 'life' },
